@@ -1,10 +1,15 @@
 <?php
+
 namespace CodeDelivery\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Order extends Model
+class Order extends Model implements Transformable
 {
+    use TransformableTrait;
+
     protected $fillable = array(
         'client_id',
         'user_deliveryman_id',
@@ -26,4 +31,5 @@ class Order extends Model
     {
         return $this->hasMany(Product::class);
     }
+
 }
