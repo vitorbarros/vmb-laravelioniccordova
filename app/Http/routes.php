@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/categories', 'CategoriesController@index');
+Route::get('/admin/categories', array('as' => 'admin.categories.index', 'uses' => 'CategoriesController@index'));
 Route::get('/admin/categories/create', array('as' => 'admin.categories.create', 'uses' => 'CategoriesController@create'));
+Route::post('/admin/categories/store', array('as' => 'admin.categories.store', 'uses' => 'CategoriesController@store'));
