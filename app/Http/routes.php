@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/admin/categories', array('as' => 'admin.categories.index', 'uses' => 'CategoriesController@index'));
 Route::get('/admin/categories/create', array('as' => 'admin.categories.create', 'uses' => 'CategoriesController@create'));
 Route::post('/admin/categories/store', array('as' => 'admin.categories.store', 'uses' => 'CategoriesController@store'));
+Route::post('/admin/categories/update/{id}', array('as' => 'admin.categories.update', 'uses' => 'CategoriesController@update'));
+Route::get('/admin/categories/edit/{id}', array('as' => 'admin.categories.edit', 'uses' => 'CategoriesController@edit'));

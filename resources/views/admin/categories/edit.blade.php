@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h3>Nova Categoria</h3>
+                <h3>Editando categoria: <b>{{ $category->name }}</b></h3>
             </div>
         </div>
 
@@ -12,12 +12,12 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                {!! Form::open(array('route' => 'admin.categories.store')) !!}
+                {!! Form::model($category, array('route' => array('admin.categories.update',$category->id))) !!}
 
                 @include('admin.categories._form')
 
                 <div class="form-group">
-                    {!! Form::submit('Criar categoria', array('class'=>'btn btn-primary')) !!}
+                    {!! Form::submit('Salvar categoria', array('class'=>'btn btn-primary')) !!}
                 </div>
 
                 {!! Form::close() !!}
