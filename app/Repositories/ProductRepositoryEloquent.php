@@ -14,6 +14,7 @@ use CodeDelivery\Validators\ProductValidator;;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+
     /**
      * Specify Model class name
      *
@@ -33,4 +34,5 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
 }

@@ -1,7 +1,7 @@
 <?php
 namespace CodeDelivery\Http\Requests;
 
-class AdminCategoryRequest extends Request
+class AdminProductRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,10 @@ class AdminCategoryRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:100|min:3'
+            'name' => 'required|max:100|min:3',
+            'description' => 'required',
+            'price' => 'required',
+            'category_id' => 'required'
         ];
     }
 }

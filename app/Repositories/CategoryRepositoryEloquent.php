@@ -4,9 +4,7 @@ namespace CodeDelivery\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\CategoryRepository;
 use CodeDelivery\Models\Category;
-use CodeDelivery\Validators\CategoryValidator;;
 
 /**
  * Class CategoryRepositoryEloquent
@@ -14,6 +12,15 @@ use CodeDelivery\Validators\CategoryValidator;;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
+
+    public function lists($column, $key = null)
+    {
+        if ($key) {
+            return $this->model->lists($column, $key);
+        }
+        return $this->model->lists($column);
+    }
+
     /**
      * Specify Model class name
      *
@@ -24,7 +31,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
