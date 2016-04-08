@@ -41,4 +41,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' =>
 
     });
 
+    //rotas dos clients
+    Route::group(array('prefix' => 'clients', 'as' => 'clients.'), function() {
+
+        Route::get('/', array('as' => 'index', 'uses' => 'ClientsController@index'));
+        Route::get('create', array('as' => 'create', 'uses' => 'ClientsController@create'));
+        Route::post('store', array('as' => 'store', 'uses' => 'ClientsController@store'));
+        Route::post('update/{id}', array('as' => 'update', 'uses' => 'ClientsController@update'));
+        Route::get('edit/{id}', array('as' => 'edit', 'uses' => 'ClientsController@edit'));
+        Route::get('destroy/{id}', array('as' => 'destroy', 'uses' => 'ClientsController@destroy'));
+
+    });
+
 });
