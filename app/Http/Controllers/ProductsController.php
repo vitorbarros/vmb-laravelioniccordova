@@ -37,8 +37,8 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        $products = $this->repository->find($id);
-        return view('admin.products.edit', compact('products'));
+        $product = $this->repository->find($id);
+        return view('admin.products.edit', compact('product'));
     }
 
     public function update(AdminCategoryRequest $request, $id)
