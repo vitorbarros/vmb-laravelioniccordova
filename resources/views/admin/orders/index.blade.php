@@ -34,15 +34,13 @@
                                 @endforeach
                                 </ul>
                             </td>
-                            <td>
-                                @if($order->deliveryman)
-                                    {{$order->deliveryman->name}}
-                                @esle
-                                    --
-                                @endif
-                            </td>
+                            @if($order->deliverymen)
+                                <td>{{$order->deliverymen->name}}</td>
+                            @else
+                                <td>--</td>
+                            @endif
                             <td>{{ $order->status }}</td>
-                            <td><a href="#">Editar</a>
+                            <td><a href="{{route('admin.orders.edit',array('id' => $order->id))}}" class="btn btn-default">Editar</a>
                             </td>
                         </tr>
                     @endforeach
