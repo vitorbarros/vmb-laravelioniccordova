@@ -53,4 +53,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' =>
 
     });
 
+    //rotas das orders
+    Route::group(array('prefix' => 'orders', 'as' => 'orders.'), function() {
+
+        Route::get('/', array('as' => 'index', 'uses' => 'OrdersController@index'));
+
+    });
+
 });

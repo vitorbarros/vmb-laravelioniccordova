@@ -21,7 +21,13 @@ class AdminClientRequest extends Request
     public function rules()
     {
         return [
-            'user.name' => 'required|max:100|min:3'
+            'user.name' => 'required|max:100|min:3',
+            'user.email' => 'required|max:100|min:3',
+            'phone' => 'required|max:11|min:3',
+            'address' => 'required|max:500|min:3',
+            'city' => 'required|max:100|min:3',
+            'state' => 'required|max:100|min:2',
+            'zipcode' => 'required|max:9|min:2',
         ];
     }
 }
