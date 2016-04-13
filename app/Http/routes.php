@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 //grupo de rortas do admin
-Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' => 'admin.'), function(){
+Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' => 'admin.'), function () {
 
     //rotas das categorias
-    Route::group(array('prefix' => 'categories', 'as' => 'categories.'), function(){
+    Route::group(array('prefix' => 'categories', 'as' => 'categories.'), function () {
 
         Route::get('/', array('as' => 'index', 'uses' => 'CategoriesController@index'));
         Route::get('create', array('as' => 'create', 'uses' => 'CategoriesController@create'));
@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' =>
     });
 
     //rotas dos produtos
-    Route::group(array('prefix' => 'products', 'as' => 'products.'), function() {
+    Route::group(array('prefix' => 'products', 'as' => 'products.'), function () {
 
         Route::get('/', array('as' => 'index', 'uses' => 'ProductsController@index'));
         Route::get('create', array('as' => 'create', 'uses' => 'ProductsController@create'));
@@ -42,7 +42,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' =>
     });
 
     //rotas dos clients
-    Route::group(array('prefix' => 'clients', 'as' => 'clients.'), function() {
+    Route::group(array('prefix' => 'clients', 'as' => 'clients.'), function () {
 
         Route::get('/', array('as' => 'index', 'uses' => 'ClientsController@index'));
         Route::get('create', array('as' => 'create', 'uses' => 'ClientsController@create'));
@@ -54,11 +54,22 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole','as' =>
     });
 
     //rotas das orders
-    Route::group(array('prefix' => 'orders', 'as' => 'orders.'), function() {
+    Route::group(array('prefix' => 'orders', 'as' => 'orders.'), function () {
 
         Route::get('/', array('as' => 'index', 'uses' => 'OrdersController@index'));
         Route::get('edit/{id}', array('as' => 'edit', 'uses' => 'OrdersController@edit'));
         Route::post('update/{id}', array('as' => 'update', 'uses' => 'OrdersController@update'));
+
+    });
+
+    //rotas dos cupoms
+    Route::group(array('prefix' => 'cupoms', 'as' => 'cupoms.'), function () {
+
+        Route::get('/', array('as' => 'index', 'uses' => 'CupomsController@index'));
+        Route::get('edit/{id}', array('as' => 'edit', 'uses' => 'CupomsController@edit'));
+        Route::get('create', array('as' => 'create', 'uses' => 'CupomsController@create'));
+        Route::post('update/{id}', array('as' => 'update', 'uses' => 'CupomsController@update'));
+        Route::post('store', array('as' => 'store', 'uses' => 'CupomsController@store'));
 
     });
 
