@@ -54,16 +54,16 @@
 
         });
 
-        function calculateTotal()
-        {
-            var total = 0;
-                trLen = $('table tbody tr').length,
-                        tr = null, price, qtd;
-
-            for(var i = 0; i < trLen; i++){
-                tr =
-            }
-        }
+//        function calculateTotal()
+//        {
+//            var total = 0;
+//                trLen = $('table tbody tr').length,
+//                        tr = null, price, qtd;
+//
+//            for(var i = 0; i < trLen; i++){
+//                tr =
+//            }
+//        }
 
     </script>
 @endsection
