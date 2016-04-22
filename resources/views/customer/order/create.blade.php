@@ -3,7 +3,7 @@
     <div class="container">
         <h3>Novo pedido</h3>
         @include('errors._check')
-        {!! Form::open(array('class' => 'form')) !!}
+        {!! Form::open(array('route' => 'customer.order.store', 'class' => 'form')) !!}
         <div class="form-group">
             <label>Total:</label>
             <p id="total"></p>
@@ -30,6 +30,11 @@
                 </tr>
                 </tbody>
             </table>
+
+            <div class="form-group">
+                {!! Form::submit('Criar Pedido', array('class' => 'btn btn-primary')) !!}
+            </div>
+
         </div>
         {!! form::close() !!}
     </div>
@@ -38,7 +43,7 @@
 @section('post-script')
     <script>
         $('#btnNewItem').click(function () {
-            var row = $('table tbody >tr:last'),
+            var row = $('table tbody > tr:last'),
                     newRow = row.clone(),
                     length = $('table tbody tr').length;
 
@@ -51,19 +56,32 @@
 
             newRow.find('input').val(1);
             newRow.insertAfter(row);
+            calculateTotal();
 
         });
 
-//        function calculateTotal()
-//        {
-//            var total = 0;
-//                trLen = $('table tbody tr').length,
-//                        tr = null, price, qtd;
-//
-//            for(var i = 0; i < trLen; i++){
-//                tr =
-//            }
-//        }
+        $(document.body).on('click', 'select', function(){
+            calculateTotal();
+        });
+
+        $(document.body).on('blur', 'input',function(){
+           calculateTotal();
+        });
+
+        function calculateTotal()
+        {
+            var total = 0,
+                    trLen = $('table tbody tr').length,
+                        tr = null, price, qtd;
+
+            for(var i = 0; i < trLen; i++){
+                tr = $('table tbody tr').eq(i);
+                price = tr.find(':selected').data('price');
+                qtd = tr.find('input').val();
+                total += price * qtd;
+            }
+            $("#total").html(total);
+        }
 
     </script>
 @endsection

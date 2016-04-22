@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('welcome');
+});
+
 //grupo de rortas do admin
 Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' => 'admin.'), function () {
 
@@ -75,8 +79,15 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' =
 
 });
 
-Route::group(array('prefix' => 'customer', 'as' => 'customer.'), function(){
+Route::group(array('prefix' => 'customer', 'middleware' => 'auth.checkrole:client','as' => 'customer.'), function () {
 
-    Route::get('order/create', array('as' => 'order.create', 'uses' => 'CheckoutController@create'));
+    //grupo de rotas as orders
+    Route::group(array('prefix' => 'order', 'as' => 'order.'), function () {
+
+        Route::get('/', array('as' => 'index', 'uses' => 'CheckoutController@index'));
+        Route::get('create', array('as' => 'create', 'uses' => 'CheckoutController@create'));
+        Route::post('store', array('as' => 'store', 'uses' => 'CheckoutController@store'));
+
+    });
 
 });
