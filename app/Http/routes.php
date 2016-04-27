@@ -20,7 +20,7 @@ Route::get('/home', function () {
 });
 
 //grupo de rortas do admin
-Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' => 'admin.'), function () {
+Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole:admin', 'as' => 'admin.'), function () {
 
     //rotas das categorias
     Route::group(array('prefix' => 'categories', 'as' => 'categories.'), function () {
