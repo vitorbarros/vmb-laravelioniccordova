@@ -91,3 +91,7 @@ Route::group(array('prefix' => 'customer', 'middleware' => 'auth.checkrole:clien
     });
 
 });
+
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
