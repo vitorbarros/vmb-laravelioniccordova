@@ -79,7 +79,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.checkrole:admin', 
 
 });
 
-Route::group(array('prefix' => 'customer', 'middleware' => 'auth.checkrole:client','as' => 'customer.'), function () {
+Route::group(array('prefix' => 'customer', 'middleware' => 'auth.checkrole:client', 'as' => 'customer.'), function () {
 
     //grupo de rotas as orders
     Route::group(array('prefix' => 'order', 'as' => 'order.'), function () {
@@ -92,8 +92,14 @@ Route::group(array('prefix' => 'customer', 'middleware' => 'auth.checkrole:clien
 
 });
 
-Route::post('oauth/access_token', function() {
+Route::post('oauth/access_token', function () {
     return Response::json(Authorizer::issueAccessToken());
 });
 
-Route::group(array('prefix' => 'api', 'middleware' => 'oauth','as' => 'api.'), function () {});
+Route::group(array('prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'), function () {
+    Route::get('teste', function () {
+        return array(
+            'teste'
+        );
+    });
+});
