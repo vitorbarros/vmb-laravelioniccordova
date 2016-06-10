@@ -40,5 +40,4 @@ class User extends Model implements Transformable, AuthenticatableContract, Auth
     public function client() {
         return $this->hasOne(Client::class);
     }
-
 }

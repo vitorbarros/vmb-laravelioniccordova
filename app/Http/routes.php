@@ -97,9 +97,14 @@ Route::post('oauth/access_token', function () {
 });
 
 Route::group(array('prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'), function () {
-    Route::get('teste', function () {
-        return array(
-            'teste'
-        );
+
+    Route::resource('authenticated', 'Api\User\UserController', array('except' => array('create', 'edit', 'destroy', 'store', 'show')));
+
+    Route::group(array('prefix' => 'client', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'), function () {
+        Route::resource('order', 'Api\Client\ClientCheckoutController', array('except' => array('create', 'edit', 'destroy')));
     });
+
+    Route::group(array('prefix' => 'deliverymen', 'middleware' => 'oauth.checkrole:deliverymen', 'as' => 'deliverymen.'), function () {
+    });
+
 });
