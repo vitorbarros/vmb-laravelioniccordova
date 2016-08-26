@@ -2,6 +2,7 @@
 namespace CodeDelivery\Http\Controllers\Api\Client;
 
 use CodeDelivery\Http\Controllers\Controller;
+use CodeDelivery\Http\Requests\CheckoutRequest;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Repositories\UserRepository;
@@ -66,11 +67,11 @@ class ClientCheckoutController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CheckoutRequest $request
      * @return mixed
      * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
         $id = Authorizer::GetResourceOwnerId();
         $clientId = $this->userRepository->find($id)->client->id;
@@ -90,9 +91,6 @@ class ClientCheckoutController extends Controller
     public function show($id)
     {
         $order = $this->orderRepository->with(array('items', 'client', 'cupoms'))->find($id);
-        $order->items->each(function ($item) {
-            $item->product;
-        });
         return $order;
     }
 }

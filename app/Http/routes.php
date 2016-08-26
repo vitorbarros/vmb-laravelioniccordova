@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('wlcome');
 });
 
 Route::get('/home', function () {
@@ -105,6 +105,8 @@ Route::group(array('prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'), 
     });
 
     Route::group(array('prefix' => 'deliverymen', 'middleware' => 'oauth.checkrole:deliverymen', 'as' => 'deliverymen.'), function () {
+        Route::resource('order', 'Api\Deliverymen\DeliverymanController', array('except' => array('create', 'edit', 'destroy', 'store')));
+        Route::patch('order/{id}/update-status',array('uses' => 'Api\Deliverymen\DeliverymanController@updateStatus', 'as' => 'orders.update_status'));
     });
 
 });
