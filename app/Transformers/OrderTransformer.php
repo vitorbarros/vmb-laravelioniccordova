@@ -13,10 +13,10 @@ class OrderTransformer extends TransformerAbstract
     /**
      * @var array
      */
-    protected $defaultIncludes = [
-        'cupom'
+    protected $availableIncludes = [
+        'cupom',
+        'items'
     ];
-    //protected $availableIncludes = [];
 
     /**
      * Transform the \Order entity
@@ -40,5 +40,10 @@ class OrderTransformer extends TransformerAbstract
             return null;
         }
         return $this->item($model->cupom, new CupomTransformer());
+    }
+
+    public function includeItems(Order $model)
+    {
+        return $this->collection($model->items, new OrderItemTransformer());
     }
 }
