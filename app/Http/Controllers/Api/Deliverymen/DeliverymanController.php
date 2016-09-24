@@ -24,6 +24,8 @@ class DeliverymanController extends Controller
      */
     private $orderService;
 
+    private $with = array('client', 'cupoms', 'items');
+
     /**
      * ClientCheckoutController constructor.
      * @param OrderRepository $orderRepository
@@ -47,7 +49,9 @@ class DeliverymanController extends Controller
     public function index()
     {
         $id = Authorizer::GetResourceOwnerId();
-        $orders = $this->orderRepository->with('items')->scopeQuery(function ($query) use ($id) {
+        $orders = $this->orderRepository
+            ->skipPresenter(false)
+            ->with($this->with)->scopeQuery(function ($query) use ($id) {
             return $query->where('user_deliverymen_id', '=', $id);
         })->paginate();
 
@@ -61,7 +65,9 @@ class DeliverymanController extends Controller
     public function show($id)
     {
         $idDeliverymen = Authorizer::GetResourceOwnerId();
-        return $this->orderRepository->getByIdAndDeliverymen($id, $idDeliverymen);
+        return $this->orderRepository
+            ->skipPresenter(false)
+            ->getByIdAndDeliverymen($id, $idDeliverymen);
     }
 
     public function updateStatus(Request $request, $id)
@@ -69,7 +75,7 @@ class DeliverymanController extends Controller
         $idDeliverymen = Authorizer::GetResourceOwnerId();
         $order = $this->orderService->updateStatus($id, $idDeliverymen, $request->get('status'));
         if($order){
-            return $order;
+            return $this->orderRepository->find($order->id);
         }
         abort(400, "Order não enontrada");
     }
